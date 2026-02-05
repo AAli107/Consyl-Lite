@@ -8,6 +8,7 @@ namespace Consyl_Lite
         const int HEIGHT = 30;
         static readonly Graphics gfx = new(WIDTH, HEIGHT, DrawPixel, DrawText, DrawLine);
         static readonly char[] drawBuffer = new char[WIDTH * HEIGHT];
+        static readonly StringBuilder screenBuffer = new((WIDTH + 1) * HEIGHT);
 
         static double timeSinceStart = 0.0;
         static double deltaTime = 0.0;
@@ -26,9 +27,8 @@ namespace Consyl_Lite
 
                 Code.Update(game);
                 Code.Render(game, gfx);
-
+                
                 // Render to Screen
-                var screenBuffer = new StringBuilder((WIDTH + 1) * HEIGHT);
                 for (int y = 0; y < HEIGHT; y++)
                 {
                     int baseIndex = y * WIDTH;
@@ -41,8 +41,10 @@ namespace Consyl_Lite
                 }
                 Console.SetCursorPosition(0, 0);
                 Console.Write(screenBuffer.ToString());
-                // Clear draw buffer for next frame
+
+                // Clear draw and screen buffer for next frame
                 Array.Fill(drawBuffer, (char)0);
+                screenBuffer.Clear();
 
                 // Delta Time Calculation 
                 deltaTime = new TimeSpan(DateTimeOffset.UtcNow.Ticks - startTime).TotalNanoseconds / 1000000000;
