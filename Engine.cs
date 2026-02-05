@@ -40,7 +40,8 @@
                 // Delta Time Calculation 
                 deltaTime = new TimeSpan(DateTimeOffset.UtcNow.Ticks - startTime).TotalNanoseconds / 1000000000;
                 timeSinceStart += deltaTime;
-                game = new(deltaTime, timeSinceStart, EndGame, IsKeyDown);
+                game.deltaTime = deltaTime;
+                game.timeSinceStart = timeSinceStart;
             }
             Code.End(game);
         }
@@ -111,7 +112,7 @@
         }
     }
 
-    public readonly struct Game(
+    public struct Game(
         double deltaTime, 
         double timeSinceStart, 
         Action EndGame,
@@ -121,11 +122,11 @@
         /// <summary>
         /// The time it takes in seconds to render a frame
         /// </summary>
-        public readonly double deltaTime = deltaTime;
+        public double deltaTime = deltaTime;
         /// <summary>
         /// The time in seconds has passed since the beginning
         /// </summary>
-        public readonly double timeSinceStart = timeSinceStart;
+        public double timeSinceStart = timeSinceStart;
         /// <summary>
         /// <para>Stops and ends game</para>
         /// <para>void EndGame()</para>
