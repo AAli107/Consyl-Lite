@@ -1,4 +1,6 @@
-﻿namespace Consyl_Lite
+﻿using System.Text;
+
+namespace Consyl_Lite
 {
     public static class Engine
     {
@@ -14,8 +16,10 @@
 
         static void Main()
         {
+            Console.CursorVisible = false;
+
             Code.Start(game);
-            
+
             while (isRunning)
             {
                 long startTime = DateTimeOffset.UtcNow.Ticks;
@@ -24,18 +28,21 @@
                 Code.Render(game, gfx);
 
                 // Render to Screen
-                Console.CursorVisible = false;
-                string screenBuffer = "";
+                var screenBuffer = new StringBuilder((WIDTH + 1) * HEIGHT);
                 for (int y = 0; y < HEIGHT; y++)
-                    for (int x = 0; x < WIDTH; x++)
-                        screenBuffer += (drawBuffer[WIDTH * y + x] < 32 ? ' ' : drawBuffer[WIDTH * y + x]).ToString() + 
-                            (x == WIDTH - 1 && y != HEIGHT - 1 ? '\n' : ' ');
-                Console.Write(screenBuffer);
-                Console.CursorLeft = 0;
-                Console.CursorTop = 0;
-                for (int y = 0; y < HEIGHT; y++)
-                    for (int x = 0; x < WIDTH; x++)
-                        drawBuffer[WIDTH * y + x] = (char)0;
+                {
+                    int baseIndex = y * WIDTH;
+                    for (int x = 0; x < HEIGHT; x++)
+                    {
+                        char c = drawBuffer[baseIndex + x];
+                        screenBuffer.Append((c < 32 ? ' ' : c) + " ");
+                    }
+                    if (y != HEIGHT - 1) screenBuffer.AppendLine();
+                }
+                Console.SetCursorPosition(0, 0);
+                Console.Write(screenBuffer.ToString());
+                // Clear draw buffer for next frame
+                Array.Fill(drawBuffer, (char)0);
 
                 // Delta Time Calculation 
                 deltaTime = new TimeSpan(DateTimeOffset.UtcNow.Ticks - startTime).TotalNanoseconds / 1000000000;
