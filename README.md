@@ -28,7 +28,9 @@ Once you setup the render code, you can now run the following:
 dotnet run
 ```
 This would build and run the code and the loop/rendering would be displayed in the terminal itself.
+
 **Note that rendering may flicker in some scenario, so be sure to adjust terminal size to fit the area being rendered or adjust `WIDTH` and `HEIGHT` values found in `./Engine.cs`...**
+
 To build the project as is without running it, just run `dotnet build -c Debug` when testing or `dotnet build -c Release` for release build.
 
 ## Features
