@@ -17,9 +17,9 @@ Here is an example rendering code to run:
 ```c#
 public static void Render(Game game, Graphics gfx)
 {
-    gfx.DrawPixel(      // Draws a single ASCII pixel
+    gfx.DrawPixel(       // Draws a single ASCII pixel
         x: 5, y: 10,     // X and Y Position
-        c: 'A'          // which ASCII pixel to draw
+        c: 'A'           // which ASCII pixel to draw
     );
 
     gfx.DrawText(               // Draws a string of text
@@ -29,7 +29,7 @@ public static void Render(Game game, Graphics gfx)
 
     gfx.DrawLine(       // Draws a line between two points
         x0: 1, y0: 2,   // X and Y Position of first point
-        x1: 20, y1: 5, // X and Y Position of second point
+        x1: 20, y1: 5,  // X and Y Position of second point
         c: 'X'          // ASCII pixel the line is made of
     );
 }
