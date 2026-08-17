@@ -41,3 +41,5 @@ This would build and run the code and the loop/rendering would be displayed in t
 **Note that rendering may flicker in some scenario, so be sure to adjust terminal size to fit the area being rendered or adjust `WIDTH` and `HEIGHT` values found in [`./Engine.cs`](./Engine.cs)**
 
 To build the project as is without running it, just run `dotnet build -c Debug` when testing or `dotnet build -c Release` for release build.
+
+You can open, build, and run this project if you have [Visual Studio Community](https://visualstudio.microsoft.com/vs/community/) too!
