@@ -11,7 +11,7 @@ Consyl Lite is a fast, light-weight Console Game Framework that enables you to d
 - Drawing Lines
 
 ## How to Run
-To run and test the project, you could go to `./Code.cs` and call any of the rendering functions (`gfx.DrawPixel` `gfx.DrawText`, `gfx.DrawLine`) inside the `Render` function. Here's an example code to run.
+To run and test the project, you could go to [`./Code.cs`](./Code.cs) and call any of the rendering functions (`gfx.DrawPixel` `gfx.DrawText`, `gfx.DrawLine`) inside the `Render` function. Here's an example code to run.
 ```c#
 public static void Render(Game game, Graphics gfx)
 {
@@ -38,6 +38,6 @@ dotnet run
 ```
 This would build and run the code and the loop/rendering would be displayed in the terminal itself.
 
-**Note that rendering may flicker in some scenario, so be sure to adjust terminal size to fit the area being rendered or adjust `WIDTH` and `HEIGHT` values found in `./Engine.cs`...**
+**Note that rendering may flicker in some scenario, so be sure to adjust terminal size to fit the area being rendered or adjust `WIDTH` and `HEIGHT` values found in [`./Engine.cs`](./Engine.cs)**
 
 To build the project as is without running it, just run `dotnet build -c Debug` when testing or `dotnet build -c Release` for release build.
