@@ -65,12 +65,13 @@ namespace Consyl_Lite
             drawBuffer[WIDTH * y + x] = c;
         }
 
-        static void DrawText(int x, int y, string message)
+        static void DrawText(int x, int y, object message)
         {
+            string msg = message.ToString();
             int charX = x;
             int charY = y;
 
-            foreach (char c in message)
+            foreach (char c in msg)
             {
                 switch (c)
                 {
