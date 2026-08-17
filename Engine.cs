@@ -122,11 +122,14 @@ namespace Consyl_Lite
         }
     }
 
+    public delegate void EndGameDelegate();
+    public delegate bool IsKeyDownDelegate(Key key);
+
     public struct Game(
         double deltaTime, 
         double timeSinceStart, 
-        Action EndGame,
-        Func<Key, bool> IsKeyDown
+        EndGameDelegate EndGame,
+        IsKeyDownDelegate IsKeyDown
     )
     {
         /// <summary>
@@ -141,20 +144,24 @@ namespace Consyl_Lite
         /// <para>Stops and ends game</para>
         /// <para>void EndGame()</para>
         /// </summary>
-        public readonly Action EndGame = EndGame;
+        public readonly EndGameDelegate EndGame = EndGame;
         /// <summary>
         /// <para>Returns true if the provided key is being pressed</para>
         /// <para>bool IsKeyDown(Key key)</para>
         /// </summary>
-        public readonly Func<Key, bool> IsKeyDown = IsKeyDown;
+        public readonly IsKeyDownDelegate IsKeyDown = IsKeyDown;
     }
+
+    public delegate void DrawPixelDelegate(int x, int y, char c);
+    public delegate void DrawTextDelegate(int x, int y, object message);
+    public delegate void DrawLineDelegate(int x0, int y0, int x1, int y1, char c);
 
     public readonly struct Graphics(
         int width, 
         int height, 
-        Action<int, int, char> DrawPixel, 
-        Action<int, int, string> DrawText,
-        Action<int, int, int, int, char> DrawLine
+        DrawPixelDelegate DrawPixel,
+        DrawTextDelegate DrawText,
+        DrawLineDelegate DrawLine
     )
     {
         /// <summary>
@@ -169,17 +176,17 @@ namespace Consyl_Lite
         /// <para>Draws an ASCII pixel c at (x, y) position</para>
         /// <para>void DrawPixel(int x, int y, char c)</para>
         /// </summary>
-        public readonly Action<int, int, char> DrawPixel = DrawPixel;
+        public readonly DrawPixelDelegate DrawPixel = DrawPixel;
         /// <summary>
         /// <para>Draws a message at (x, y) position</para>
         /// <para>void DrawText(int x, int y, string message)</para>
         /// </summary>
-        public readonly Action<int, int, string> DrawText = DrawText;
+        public readonly DrawTextDelegate DrawText = DrawText;
         /// <summary>
         /// <para>Draws an ASCII line c between (x0, y0) and (x1, y1)</para>
         /// <para>void DrawLine(int x0, int y0, int x1, int y1, char c)</para>
         /// </summary>
-        public readonly Action<int, int, int, int, char> DrawLine = DrawLine;
+        public readonly DrawLineDelegate DrawLine = DrawLine;
     }
 
     public enum Key
